@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
-import CodeHighlight from "../../components/CodeHighlight";
+import CodeHighlight from "../../layout/CodeHighlight";
 import { IconService } from "../../demo/service/IconService";
 import getConfig from "next/config";
 

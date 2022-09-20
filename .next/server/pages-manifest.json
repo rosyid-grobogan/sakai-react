@@ -2,12 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/formlayout": "pages/formlayout.js",
-  "/input": "pages/input.js",
-  "/tree": "pages/tree.js",
-  "/panel": "pages/panel.js",
-  "/invalidstate": "pages/invalidstate.js",
-  "/floatlabel": "pages/floatlabel.js",
-  "/button": "pages/button.js"
+  "/crud": "pages/crud.js"
 }
