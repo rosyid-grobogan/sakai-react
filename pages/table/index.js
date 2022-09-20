@@ -13,8 +13,8 @@ import { Slider } from "primereact/slider";
 import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { ToggleButton } from "primereact/togglebutton";
 import { Rating } from "primereact/rating";
-import { CustomerService } from "../../service/CustomerService";
-import { ProductService } from "../../service/ProductService";
+import { CustomerService } from "../../demo/service/CustomerService";
+import { ProductService } from "../../demo/service/ProductService";
 
 const TableDemo = () => {
     const [customers1, setCustomers1] = useState(null);
@@ -106,7 +106,7 @@ const TableDemo = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="assets/demo/images/flags/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src="/demo/images/flags/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
                 <span style={{ marginLeft: ".5em", verticalAlign: "middle" }} className="image-text">
                     {rowData.country.name}
                 </span>
@@ -146,7 +146,7 @@ const TableDemo = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`assets/demo/images/avatar/${option.image}`} width={32} style={{ verticalAlign: "middle" }} />
+                <img alt={option.name} src={`/demo/images/avatar/${option.image}`} width={32} style={{ verticalAlign: "middle" }} />
                 <span style={{ marginLeft: ".5em", verticalAlign: "middle" }} className="image-text">
                     {option.name}
                 </span>
@@ -382,7 +382,5 @@ const TableDemo = () => {
         </div>
     );
 };
-
-
 
 export default TableDemo;

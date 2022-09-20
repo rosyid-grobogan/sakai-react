@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import CodeHighlight from "../../components/CodeHighlight";
-import { IconService } from '../../service/IconService';
-import getConfig from 'next/config';
+import { IconService } from "../../demo/service/IconService";
+import getConfig from "next/config";
 
 const IconsDemo = () => {
     const [icons, setIcons] = useState([]);
@@ -11,14 +11,11 @@ const IconsDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        (new IconService()).getIcons().then(data => {
+        new IconService().getIcons().then((data) => {
             data.sort((icon1, icon2) => {
-                if(icon1.properties.name < icon2.properties.name)
-                    return -1;
-                else if(icon1.properties.name < icon2.properties.name)
-                    return 1;
-                else
-                    return 0;
+                if (icon1.properties.name < icon2.properties.name) return -1;
+                else if (icon1.properties.name < icon2.properties.name) return 1;
+                else return 0;
             });
 
             setIcons(data);
@@ -40,8 +37,8 @@ const IconsDemo = () => {
 
     return (
         <div className="card docs">
-                <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>        
-             <h4>Icons</h4>
+            <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
+            <h4>Icons</h4>
             <p>
                 PrimeReact components internally use{" "}
                 <a href="https://github.com/primefaces/primeicons" className="font-medium">
@@ -127,7 +124,7 @@ const items = [
     }
 ]
 `}
-            </CodeHighlight>  
+            </CodeHighlight>
             <h5>List of Icons</h5>
             <p>
                 Here is the current list of PrimeIcons, more icons are added periodically. You may also{" "}
@@ -158,7 +155,5 @@ const items = [
         </div>
     );
 };
-
-
 
 export default IconsDemo;

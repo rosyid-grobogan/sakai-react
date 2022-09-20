@@ -30,10 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/blocks": [
+    "/button": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/blocks.js"
+      "static/chunks/pages/button.js"
+    ],
+    "/floatlabel": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/floatlabel.js"
     ],
     "/formlayout": [
       "static/chunks/webpack.js",
@@ -50,20 +55,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/invalidstate.js"
     ],
-    "/overlay": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/overlay.js"
-    ],
     "/panel": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/panel.js"
     ],
-    "/table": [
+    "/tree": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/table.js"
+      "static/chunks/pages/tree.js"
     ]
   },
   "ampFirstPages": []

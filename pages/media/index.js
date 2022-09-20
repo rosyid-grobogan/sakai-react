@@ -3,9 +3,9 @@ import { Carousel } from "primereact/carousel";
 import { Galleria } from "primereact/galleria";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import { ProductService } from "../../service/ProductService";
-import { PhotoService } from "../../service/PhotoService";
-import getConfig from 'next/config';
+import { ProductService } from "../../demo/service/ProductService";
+import { PhotoService } from "../../demo/service/PhotoService";
+import getConfig from "next/config";
 
 const MediaDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -60,7 +60,7 @@ const MediaDemo = () => {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={`assets/demo/images/product/${product.image}`} alt={product.name} className="product-image" />
+                        <img src={`/demo/images/product/${product.image}`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="p-mb-1">{product.name}</h4>
@@ -77,8 +77,8 @@ const MediaDemo = () => {
         );
     };
 
-    const galleriaItemTemplate = (item) => <img src={`${contextPath}/assets/${item.itemImageSrc}`} alt={item.alt} style={{ width: "100%", display: "block" }} />;
-    const galleriaThumbnailTemplate = (item) => <img src={`${contextPath}/assets/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: "100%", display: "block" }} />;
+    const galleriaItemTemplate = (item) => <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: "100%", display: "block" }} />;
+    const galleriaThumbnailTemplate = (item) => <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: "100%", display: "block" }} />;
 
     return (
         <div className="grid p-fluid media-demo">
@@ -100,7 +100,7 @@ const MediaDemo = () => {
                 <div className="card">
                     <h5>Image</h5>
                     <div className="flex justify-content-center">
-                        <Image src={`${contextPath}/assets/demo/images/galleria/galleria11.jpg`} alt="galleria" width={250} preview />
+                        <Image src={`${contextPath}/demo/images/galleria/galleria11.jpg`} alt="galleria" width={250} preview />
                     </div>
                 </div>
             </div>
