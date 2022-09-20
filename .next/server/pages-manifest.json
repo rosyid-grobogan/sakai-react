@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/table": "pages/table.js",
+  "/panel": "pages/panel.js",
+  "/overlay": "pages/overlay.js",
+  "/invalidstate": "pages/invalidstate.js",
+  "/blocks": "pages/blocks.js",
+  "/input": "pages/input.js",
+  "/formlayout": "pages/formlayout.js"
+}
