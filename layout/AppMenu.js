@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "../demo/utils/navlink";
 import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
 import { Ripple } from "primereact/ripple";
 import { Badge } from "primereact/badge";
+import { LayoutContext } from "./layoutcontext";
 
 const AppSubmenu = (props) => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -64,7 +65,7 @@ const AppSubmenu = (props) => {
             );
         } else {
             return (
-                <a tabIndex="0" aria-label={item.label} onKeyDown={onKeyDown} role="menuitem" href={item.url} className="p-ripple" onClick={(e) => onMenuItemClick(e, item, i)}>
+                <a tabIndex="0" aria-label={item.label} onKeyDown={onKeyDown} role="menuitem" href={item.url} className="p-ripple" onClick={(e) => onMenuItemClick(e, item, i)} target={"_blank"}>
                     {content}
                 </a>
             );
@@ -109,12 +110,13 @@ const AppSubmenu = (props) => {
     ) : null;
 };
 
-export default function AppMenu(props) {
+export default function AppMenu() {
+    const { menu, onMenuItemClick, layoutColorMode } = useContext(LayoutContext);
     return (
         <div className="layout-menu-container">
-            <AppSubmenu items={props.model} className="layout-menu" onMenuItemClick={props.onMenuItemClick} root={true} role="menu" />
+            <AppSubmenu items={menu} className="layout-menu" onMenuItemClick={onMenuItemClick} root={true} role="menu" />
             <a href="https://www.primefaces.org/primeblocks-react" className="block mt-3">
-                <img alt="primeblocks" className="w-full" src={props.layoutColorMode === "light" ? "/layout/images/banner-primeblocks.png" : "/layout/images/banner-primeblocks-dark.png"} />
+                <img alt="primeblocks" className="w-full" src={layoutColorMode === "light" ? "/layout/images/banner-primeblocks.png" : "/layout/images/banner-primeblocks-dark.png"} />
             </a>
         </div>
     );

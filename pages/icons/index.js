@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
-import CodeHighlight from "../../layout/CodeHighlight";
+import { CodeHighlight } from "../../demo/components/CodeHighlight";
 import { IconService } from "../../demo/service/IconService";
-import getConfig from "next/config";
+import Link from "next/link";
 
 const IconsDemo = () => {
     const [icons, setIcons] = useState([]);
     const [filteredIcons, setFilteredIcons] = useState([]);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         new IconService().getIcons().then((data) => {
@@ -37,15 +36,14 @@ const IconsDemo = () => {
 
     return (
         <div className="card docs">
-            <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             <h4>Icons</h4>
             <p>
                 PrimeReact components internally use{" "}
-                <a href="https://github.com/primefaces/primeicons" className="font-medium">
+                <a href="https://github.com/primefaces/primeicons" className="font-medium" target={"_blank"}>
                     PrimeIcons
                 </a>{" "}
                 library, the official icons suite from{" "}
-                <a href="https://www.primetek.com.tr" className="font-medium">
+                <a href="https://www.primetek.com.tr" className="font-medium" target={"_blank"}>
                     PrimeTek
                 </a>
                 .
@@ -128,7 +126,7 @@ const items = [
             <h5>List of Icons</h5>
             <p>
                 Here is the current list of PrimeIcons, more icons are added periodically. You may also{" "}
-                <a href="https://github.com/primefaces/primeicons/issues" className="font-medium">
+                <a href="https://github.com/primefaces/primeicons/issues" className="font-medium" target={"_blank"}>
                     request new icons
                 </a>{" "}
                 at the issue tracker.

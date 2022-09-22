@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState, useContext } from "react";
 import { RadioButton } from "primereact/radiobutton";
 import { InputSwitch } from "primereact/inputswitch";
 import classNames from "classnames";
 import { Button } from "primereact/button";
+import { LayoutContext } from "./layoutcontext";
 
-export default function AppConfig(props) {
+export default function AppConfig() {
     const [active, setActive] = useState(false);
     const [scale, setScale] = useState(14);
     const [scales] = useState([12, 13, 14, 15, 16]);
     const [theme, setTheme] = useState("lara-light-indigo");
+    const { ripple, onRipple, inputStyle, onInputStyleChange, layoutMode, onLayoutModeChange, onColorModeChange } = useContext(LayoutContext);
+
     const config = useRef(null);
     let outsideClickListener = useRef(null);
 
@@ -109,7 +112,7 @@ export default function AppConfig(props) {
     };
 
     const changeTheme = (e, theme, scheme) => {
-        props.onColorModeChange(scheme);
+        onColorModeChange(scheme);
         setTheme(theme);
     };
 
@@ -133,26 +136,26 @@ export default function AppConfig(props) {
                 <h5>Input Style</h5>
                 <div className="p-formgroup-inline">
                     <div className="field-radiobutton">
-                        <RadioButton inputId="input_outlined" name="inputstyle" value="outlined" onChange={(e) => props.onInputStyleChange(e.value)} checked={props.inputStyle === "outlined"} />
+                        <RadioButton inputId="input_outlined" name="inputstyle" value="outlined" onChange={(e) => onInputStyleChange(e.value)} checked={inputStyle === "outlined"} />
                         <label htmlFor="input_outlined">Outlined</label>
                     </div>
                     <div className="field-radiobutton">
-                        <RadioButton inputId="input_filled" name="inputstyle" value="filled" onChange={(e) => props.onInputStyleChange(e.value)} checked={props.inputStyle === "filled"} />
+                        <RadioButton inputId="input_filled" name="inputstyle" value="filled" onChange={(e) => onInputStyleChange(e.value)} checked={inputStyle === "filled"} />
                         <label htmlFor="input_filled">Filled</label>
                     </div>
                 </div>
 
                 <h5>Ripple Effect</h5>
-                <InputSwitch checked={props.rippleEffect} onChange={props.onRippleEffect} />
+                <InputSwitch checked={ripple} onChange={onRipple} />
 
                 <h5>Menu Type</h5>
                 <div className="p-formgroup-inline">
                     <div className="field-radiobutton">
-                        <RadioButton inputId="static" name="layoutMode" value="static" onChange={(e) => props.onLayoutModeChange(e.value)} checked={props.layoutMode === "static"} />
+                        <RadioButton inputId="static" name="layoutMode" value="static" onChange={(e) => onLayoutModeChange(e.value)} checked={layoutMode === "static"} />
                         <label htmlFor="static">Static</label>
                     </div>
                     <div className="field-radiobutton">
-                        <RadioButton inputId="overlay" name="layoutMode" value="overlay" onChange={(e) => props.onLayoutModeChange(e.value)} checked={props.layoutMode === "overlay"} />
+                        <RadioButton inputId="overlay" name="layoutMode" value="overlay" onChange={(e) => onLayoutModeChange(e.value)} checked={layoutMode === "overlay"} />
                         <label htmlFor="overlay">Overlay</label>
                     </div>
                 </div>
