@@ -15,8 +15,8 @@ export default function MyApp({ Component, pageProps }) {
     } else {
         return (
             <LayoutProvider layoutColorMode={layoutColorMode} setLayoutColorMode={setLayoutColorMode}>
-                <Layout layoutColorMode={layoutColorMode} setLayoutColorMode={setLayoutColorMode}>
-                    <Component {...pageProps} colorMode={layoutColorMode} />
+                <Layout>
+                    <Component {...pageProps} />
                 </Layout>
             </LayoutProvider>
         );

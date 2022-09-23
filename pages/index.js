@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import getConfig from "next/config";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
 import { Chart } from "primereact/chart";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProductService } from "../demo/service/ProductService";
+import { LayoutContext } from "../layout/layoutcontext";
 
 const lineData = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -29,12 +29,12 @@ const lineData = {
     ],
 };
 
-const Dashboard = (props) => {
+const Dashboard = () => {
     const [products, setProducts] = useState(null);
     const menu1 = useRef(null);
     const menu2 = useRef(null);
     const [lineOptions, setLineOptions] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const { layoutColorMode } = useContext(LayoutContext);
     const applyLightTheme = () => {
         const lineOptions = {
             plugins: {
@@ -105,12 +105,12 @@ const Dashboard = (props) => {
     }, []);
 
     useEffect(() => {
-        if (props.colorMode === "light") {
+        if (layoutColorMode === "light") {
             applyLightTheme();
         } else {
             applyDarkTheme();
         }
-    }, [props.colorMode]);
+    }, [layoutColorMode]);
 
     const formatCurrency = (value) => {
         return value.toLocaleString("en-US", { style: "currency", currency: "USD" });

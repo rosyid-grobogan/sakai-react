@@ -65,7 +65,7 @@ const AppSubmenu = (props) => {
             );
         } else {
             return (
-                <a tabIndex="0" aria-label={item.label} onKeyDown={onKeyDown} role="menuitem" href={item.url} className="p-ripple" onClick={(e) => onMenuItemClick(e, item, i)} target={"_blank"}>
+                <a tabIndex="0" aria-label={item.label} onKeyDown={onKeyDown} role="menuitem" href={item.url} className="p-ripple" onClick={(e) => onMenuItemClick(e, item, i)} target={"_blank"} rel="noreferrer">
                     {content}
                 </a>
             );
