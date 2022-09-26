@@ -165,7 +165,7 @@ function LayoutProvider({ children, layoutColorMode, setLayoutColorMode }) {
         },
         {
             label: "Icons",
-            items: [{ label: "PrimeIcons", icon: "pi pi-fw pi-prime", to: "/icons" }],
+            items: [{ label: "PrimeIcons", icon: "pi pi-fw pi-prime", to: "/icons", badge: "NEW" }],
         },
         {
             label: "Pages",
