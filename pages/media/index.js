@@ -11,6 +11,7 @@ const MediaDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [products, setProducts] = useState([]);
     const [images, setImages] = useState([]);
+
     const galleriaResponsiveOptions = [
         {
             breakpoint: "1024px",
@@ -60,7 +61,7 @@ const MediaDemo = () => {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={`/demo/images/product/${product.image}`} alt={product.name} className="product-image" />
+                        <img src={`${contextPath}/demo/images/product/${product.image}`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="p-mb-1">{product.name}</h4>

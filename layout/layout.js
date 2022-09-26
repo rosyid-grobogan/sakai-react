@@ -10,12 +10,24 @@ import PrimeReact from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
 import getConfig from "next/config";
 import { LayoutContext } from "./layoutcontext";
+import classNames from "classnames";
 
 function Layout({ children }) {
-    const { wrapperClass, onWrapperClick, onSidebarClick, mobileMenuActive } = useContext(LayoutContext);
+    const { inputStyle, ripple, layoutColorMode, layoutMode, staticMenuInactive, overlayMenuActive, onWrapperClick, onSidebarClick, mobileMenuActive } = useContext(LayoutContext);
     const copyTooltipRef = useRef();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     PrimeReact.ripple = true;
+
+    const containerClass = classNames("layout-wrapper", {
+        "layout-overlay": layoutMode === "overlay",
+        "layout-static": layoutMode === "static",
+        "layout-static-sidebar-inactive": staticMenuInactive && layoutMode === "static",
+        "layout-overlay-sidebar-active": overlayMenuActive && layoutMode === "overlay",
+        "layout-mobile-sidebar-active": mobileMenuActive,
+        "p-input-filled": inputStyle === "filled",
+        "p-ripple-disabled": ripple === false,
+        "layout-theme-light": layoutColorMode === "light",
+    });
 
     return (
         <>
@@ -30,7 +42,7 @@ function Layout({ children }) {
                     {/* eslint-enable */}
                 </Head>
 
-                <div className={wrapperClass} onClick={onWrapperClick}>
+                <div className={containerClass} onClick={onWrapperClick}>
                     <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
 
                     <AppTopbar />

@@ -2,15 +2,17 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import { LayoutContext } from "./layoutcontext";
+import getConfig from "next/config";
 
 export default function AppTopbar() {
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const { onToggleMenuClick, layoutColorMode, mobileTopbarMenuActive, onMobileTopbarMenuClick, onMobileSubTopbarMenuClick } = useContext(LayoutContext);
     return (
         <div className="layout-topbar">
-            <Link href="/">
+            <Link href={`${contextPath}/`}>
                 <a className="layout-topbar-logo">
                     <>
-                        <img src={layoutColorMode === "light" ? "/layout/images/logo-dark.svg" : "/layout/images/logo-white.svg"} width="47.22px" height={"35px"} widt={"true"} alt="logo" />
+                        <img src={layoutColorMode === "light" ? `${contextPath}/layout/images/logo-dark.svg` : `${contextPath}/layout/images/logo-white.svg`} width="47.22px" height={"35px"} widt={"true"} alt="logo" />
                         <span>SAKAI</span>
                     </>
                 </a>

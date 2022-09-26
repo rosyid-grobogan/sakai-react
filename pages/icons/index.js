@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { CodeHighlight } from "../../demo/components/CodeHighlight";
 import { IconService } from "../../demo/service/IconService";
-import Link from "next/link";
 
 const IconsDemo = () => {
     const [icons, setIcons] = useState([]);

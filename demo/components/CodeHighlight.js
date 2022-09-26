@@ -9,10 +9,12 @@ export function CodeHighlight(props) {
     }, []);
 
     return (
-        <pre style={props.style}>
-            <code ref={codeElement} className={languageClassName}>
-                {props.children}&nbsp;
-            </code>
-        </pre>
+        <div>
+            <pre style={props.style}>
+                <code ref={codeElement} className={languageClassName}>
+                    {props.children}&nbsp;
+                </code>
+            </pre>
+        </div>
     );
 }

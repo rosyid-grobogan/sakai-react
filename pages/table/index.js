@@ -15,6 +15,7 @@ import { ToggleButton } from "primereact/togglebutton";
 import { Rating } from "primereact/rating";
 import { CustomerService } from "../../demo/service/CustomerService";
 import { ProductService } from "../../demo/service/ProductService";
+import getConfig from "next/config";
 
 const TableDemo = () => {
     const [customers1, setCustomers1] = useState(null);
@@ -26,6 +27,7 @@ const TableDemo = () => {
     const [idFrozen, setIdFrozen] = useState(false);
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const representatives = [
         { name: "Amy Elsner", image: "amyelsner.png" },
@@ -106,7 +108,7 @@ const TableDemo = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/demo/images/flags/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src={`${contextPath}/demo/images/flags/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span style={{ marginLeft: ".5em", verticalAlign: "middle" }} className="image-text">
                     {rowData.country.name}
                 </span>
@@ -126,7 +128,7 @@ const TableDemo = () => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={`images/avatar/${representative.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} width={32} style={{ verticalAlign: "middle" }} />
+                <img alt={representative.name} src={`demo/images/avatar/${representative.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} width={32} style={{ verticalAlign: "middle" }} />
                 <span style={{ marginLeft: ".5em", verticalAlign: "middle" }} className="image-text">
                     {representative.name}
                 </span>
@@ -146,7 +148,7 @@ const TableDemo = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`/demo/images/avatar/${option.image}`} width={32} style={{ verticalAlign: "middle" }} />
+                <img alt={option.name} src={`${contextPath}/demo/images/avatar/${option.image}`} width={32} style={{ verticalAlign: "middle" }} />
                 <span style={{ marginLeft: ".5em", verticalAlign: "middle" }} className="image-text">
                     {option.name}
                 </span>
@@ -230,7 +232,7 @@ const TableDemo = () => {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} alt={rowData.image} className="shadow-2" width={100} />;
+        return <img src={`demo/images/product/${rowData.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} alt={rowData.image} className="shadow-2" width={100} />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -271,7 +273,7 @@ const TableDemo = () => {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={`images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: "middle" }} />
+                <img alt={data.representative.name} src={`demo/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: "middle" }} />
                 <span className="image-text font-bold">{data.representative.name}</span>
             </React.Fragment>
         );

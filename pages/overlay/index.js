@@ -9,7 +9,7 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { InputText } from "primereact/inputtext";
 import { confirmPopup } from "primereact/confirmpopup";
 import { ProductService } from "../../demo/service/ProductService";
-import Head from "next/head";
+import getConfig from "next/config";
 
 const OverlayDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
@@ -24,6 +24,7 @@ const OverlayDemo = () => {
     const op = useRef(null);
     const op2 = useRef(null);
     const toast = useRef(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const accept = () => {
         toast.current.show({ severity: "info", summary: "Confirmed", detail: "You have accepted", life: 3000 });
@@ -66,7 +67,7 @@ const OverlayDemo = () => {
     };
 
     const basicDialogFooter = <Button type="button" label="Dismiss" onClick={() => setDisplayBasic(false)} icon="pi pi-check" className="p-button-secondary" />;
-    const imageBodyTemplate = (data) => <img src={`/demo/images/product/${data.image}`} alt={data.image} className="product-image" width="100" style={{ boxShadow: "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)" }} />;
+    const imageBodyTemplate = (data) => <img src={`${contextPath}/demo/images/product/${data.image}`} alt={data.image} className="product-image" width="100" style={{ boxShadow: "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)" }} />;
     const priceBodyTemplate = (data) => formatCurrency(data.price);
     const confirmationDialogFooter = (
         <>

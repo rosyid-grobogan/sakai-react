@@ -9,10 +9,12 @@ import { Chip } from "primereact/chip";
 import { Skeleton } from "primereact/skeleton";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { ScrollTop } from "primereact/scrolltop";
+import getConfig from "next/config";
 
 const MiscDemo = () => {
     const [value, setValue] = useState(0);
     const interval = useRef(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         let val = value;
@@ -88,11 +90,11 @@ const MiscDemo = () => {
                     <h4>Avatar</h4>
                     <h5>Avatar Group</h5>
                     <AvatarGroup className="mb-3">
-                        <Avatar image="/demo/images/avatar/amyelsner.png" size="large" shape="circle"></Avatar>
-                        <Avatar image="/demo/images/avatar/asiyajavayant.png" size="large" shape="circle"></Avatar>
-                        <Avatar image="/demo/images/avatar/onyamalimba.png" size="large" shape="circle"></Avatar>
-                        <Avatar image="/demo/images/avatar/ionibowcher.png" size="large" shape="circle"></Avatar>
-                        <Avatar image="/demo/images/avatar/xuxuefeng.png" size="large" shape="circle"></Avatar>
+                        <Avatar image={`${contextPath}/demo/images/avatar/amyelsner.png`} size="large" shape="circle"></Avatar>
+                        <Avatar image={`${contextPath}/demo/images/avatar/asiyajavayant.png`} size="large" shape="circle"></Avatar>
+                        <Avatar image={`${contextPath}/demo/images/avatar/onyamalimba.png`} size="large" shape="circle"></Avatar>
+                        <Avatar image={`${contextPath}/demo/images/avatar/ionibowcher.png`} size="large" shape="circle"></Avatar>
+                        <Avatar image={`${contextPath}/demo/images/avatar/xuxuefeng.png`} size="large" shape="circle"></Avatar>
                         <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: "#9c27b0", color: "#ffffff" }}></Avatar>
                     </AvatarGroup>
 
@@ -165,18 +167,18 @@ const MiscDemo = () => {
 
                     <h5>Image</h5>
                     <div className="flex align-items-center flex-column sm:flex-row">
-                        <Chip label="Amy Elsner" image="/demo/images/avatar/amyelsner.png" className="mr-2 mb-2" />
-                        <Chip label="Asiya Javayant" image="/demo/images/avatar/asiyajavayant.png" className="mr-2 mb-2" />
-                        <Chip label="Onyama Limba" image="/demo/images/avatar/onyamalimba.png" className="mr-2 mb-2" />
-                        <Chip label="Xuxue Feng" image="/demo/images/avatar/xuxuefeng.png" className="mb-2" removable />
+                        <Chip label="Amy Elsner" image={`${contextPath}/demo/images/avatar/amyelsner.png`} className="mr-2 mb-2" />
+                        <Chip label="Asiya Javayant" image={`${contextPath}/demo/images/avatar/asiyajavayant.png`} className="mr-2 mb-2" />
+                        <Chip label="Onyama Limba" image={`${contextPath}/demo/images/avatar/onyamalimba.png`} className="mr-2 mb-2" />
+                        <Chip label="Xuxue Feng" image={`${contextPath}/demo/images/avatar/xuxuefeng.png`} className="mb-2" removable />
                     </div>
 
                     <h5>Styling</h5>
                     <div className="flex align-items-center flex-column sm:flex-row">
                         <Chip label="Action" className="mr-2 mb-2 custom-chip" />
                         <Chip label="Apple" icon="pi pi-apple" className="mr-2 mb-2 custom-chip" />
-                        <Chip label="Onyama Limba" image="/demo/images/avatar/onyamalimba.png" className="mr-2 mb-2 custom-chip" />
-                        <Chip label="Xuxue Feng" image="/demo/images/avatar/xuxuefeng.png" className="custom-chip mb-2" removable />
+                        <Chip label="Onyama Limba" image={`${contextPath}/demo/images/avatar/onyamalimba.png`} className="mr-2 mb-2 custom-chip" />
+                        <Chip label="Xuxue Feng" image={`${contextPath}/demo/images/avatar/xuxuefeng.png`} className="custom-chip mb-2" removable />
                     </div>
                 </div>
 

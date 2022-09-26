@@ -4,9 +4,11 @@ import { Chip } from "primereact/chip";
 import { InputText } from "primereact/inputtext";
 import { Checkbox } from "primereact/checkbox";
 import BlockViewer from "../../demo/components/BlockViewer";
+import getConfig from "next/config";
 
 const BlocksDemo = () => {
     const [checked, setChecked] = useState(false);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const block1 = `
 <div className="grid grid-nogutter surface-section text-800">
@@ -21,7 +23,7 @@ const BlocksDemo = () => {
         </section>
     </div>
     <div className="col-12 md:col-6 overflow-hidden">
-        <img src="images/blocks/hero/hero-1.png" alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }} />
+        <img src="demo/images/blocks/hero/hero-1.png" alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }} />
     </div>
 </div>
     `;
@@ -333,7 +335,7 @@ const BlocksDemo = () => {
     const block8 = `
 <div className="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div className="text-center mb-5">
-        <img src="images/blocks/logos/hyper.svg" alt="hyper" height="50" className="mb-3" />
+        <img src="demo/images/blocks/logos/hyper.svg" alt="hyper" height="50" className="mb-3" />
         <div className="text-900 text-3xl font-medium mb-3">Welcome Back</div>
         <span className="text-600 font-medium line-height-3">Don't have an account?</span>
         <a className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
@@ -432,7 +434,7 @@ const BlocksDemo = () => {
                         </section>
                     </div>
                     <div className="col-12 md:col-6 overflow-hidden">
-                        <img src="images/blocks/hero/hero-1.png" alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: "polygon(8% 0, 100% 0%, 100% 100%, 0 100%)" }} />
+                        <img src={`${contextPath}/demo/images/blocks/hero/hero-1.png`} alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: "polygon(8% 0, 100% 0%, 100% 100%, 0 100%)" }} />
                     </div>
                 </div>
             </BlockViewer>
@@ -751,7 +753,7 @@ const BlocksDemo = () => {
             <BlockViewer header="Sign-In" code={block8} containerClassName="surface-ground px-4 py-8 md:px-6 lg:px-8 flex align-items-center justify-content-center">
                 <div className="surface-card p-4 shadow-2 border-round w-full lg:w-6">
                     <div className="text-center mb-5">
-                        <img src="images/blocks/logos/hyper.svg" alt="hyper" height="50" className="mb-3" />
+                        <img src={`${contextPath}/demo/images/blocks/logos/hyper.svg`} alt="hyper" height="50" className="mb-3" />
                         <div className="text-900 text-3xl font-medium mb-3">Welcome Back</div>
                         <span className="text-600 font-medium line-height-3">Don&apos;t have an account?</span>
                         <button className="p-link font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</button>
