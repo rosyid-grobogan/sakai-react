@@ -7,7 +7,6 @@ import { Badge } from "primereact/badge";
 import { LayoutContext } from "./layoutcontext";
 import getConfig from "next/config";
 import data from "./data";
-const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
 const AppSubmenu = (props) => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -61,7 +60,7 @@ const AppSubmenu = (props) => {
 
         if (item.to) {
             return (
-                <NavLink ariaLabel={item.label} onKeyDown={onKeyDown} role="menuitem" className="p-ripple" href={contextPath + item.to} onClick={(e) => onMenuItemClick(e, item, i)} exact>
+                <NavLink ariaLabel={item.label} onKeyDown={onKeyDown} role="menuitem" className="p-ripple" href={item.to} onClick={(e) => onMenuItemClick(e, item, i)} exact>
                     {content}
                 </NavLink>
             );
@@ -114,6 +113,8 @@ const AppSubmenu = (props) => {
 
 export default function AppMenu() {
     const { onMenuItemClick, layoutColorMode } = useContext(LayoutContext);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+
     return (
         <div className="layout-menu-container">
             <AppSubmenu items={data.menu} className="layout-menu" onMenuItemClick={onMenuItemClick} root={true} role="menu" />
