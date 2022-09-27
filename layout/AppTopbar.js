@@ -9,7 +9,7 @@ export default function AppTopbar() {
     const { onToggleMenuClick, layoutColorMode, mobileTopbarMenuActive, onMobileTopbarMenuClick, onMobileSubTopbarMenuClick } = useContext(LayoutContext);
     return (
         <div className="layout-topbar">
-            <Link href={`${contextPath}/`}>
+            <Link href={"/"}>
                 <a className="layout-topbar-logo">
                     <>
                         <img src={layoutColorMode === "light" ? `${contextPath}/layout/images/logo-dark.svg` : `${contextPath}/layout/images/logo-white.svg`} width="47.22px" height={"35px"} widt={"true"} alt="logo" />
