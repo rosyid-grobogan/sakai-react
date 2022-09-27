@@ -6,10 +6,11 @@ import { Ripple } from "primereact/ripple";
 import { Badge } from "primereact/badge";
 import { LayoutContext } from "./layoutcontext";
 import getConfig from "next/config";
+import data from "./data";
+const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
 const AppSubmenu = (props) => {
     const [activeIndex, setActiveIndex] = useState(null);
-
     const onMenuItemClick = (event, item, index) => {
         //avoid processing disabled items
         if (item.disabled) {
@@ -60,7 +61,7 @@ const AppSubmenu = (props) => {
 
         if (item.to) {
             return (
-                <NavLink ariaLabel={item.label} onKeyDown={onKeyDown} role="menuitem" className="p-ripple" href={item.to} onClick={(e) => onMenuItemClick(e, item, i)} exact>
+                <NavLink ariaLabel={item.label} onKeyDown={onKeyDown} role="menuitem" className="p-ripple" href={contextPath + item.to} onClick={(e) => onMenuItemClick(e, item, i)} exact>
                     {content}
                 </NavLink>
             );
@@ -113,153 +114,9 @@ const AppSubmenu = (props) => {
 
 export default function AppMenu() {
     const { onMenuItemClick, layoutColorMode } = useContext(LayoutContext);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    const menu = [
-        {
-            label: "Home",
-            items: [
-                {
-                    label: "Dashboard",
-                    icon: "pi pi-fw pi-home",
-                    to: "/",
-                },
-            ],
-        },
-        {
-            label: "UI Components",
-            icon: "pi pi-fw pi-sitemap",
-            items: [
-                {
-                    label: "Form Layout",
-                    icon: "pi pi-fw pi-id-card",
-                    to: "/formlayout",
-                },
-                { label: "Input", icon: "pi pi-fw pi-check-square", to: "/input" },
-                {
-                    label: "Float Label",
-                    icon: "pi pi-fw pi-bookmark",
-                    to: "/floatlabel",
-                },
-                {
-                    label: "Invalid State",
-                    icon: "pi pi-fw pi-exclamation-circle",
-                    to: "/invalidstate",
-                },
-                { label: "Button", icon: "pi pi-fw pi-mobile", to: "/button" },
-                { label: "Table", icon: "pi pi-fw pi-table", to: "/table" },
-                { label: "List", icon: "pi pi-fw pi-list", to: "/list" },
-                { label: "Tree", icon: "pi pi-fw pi-share-alt", to: "/tree" },
-                { label: "Panel", icon: "pi pi-fw pi-tablet", to: "/panel" },
-                { label: "Overlay", icon: "pi pi-fw pi-clone", to: "/overlay" },
-                { label: "Media", icon: "pi pi-fw pi-image", to: "/media" },
-                { label: "Menu", icon: "pi pi-fw pi-bars", to: "/menu" },
-                { label: "Message", icon: "pi pi-fw pi-comment", to: "/messages" },
-                { label: "File", icon: "pi pi-fw pi-file", to: "/file" },
-                { label: "Chart", icon: "pi pi-fw pi-chart-bar", to: "/chart" },
-                { label: "Misc", icon: "pi pi-fw pi-circle-off", to: "/misc" },
-            ],
-        },
-        {
-            label: "UI Blocks",
-            items: [
-                {
-                    label: "Free Blocks",
-                    icon: "pi pi-fw pi-eye",
-                    to: "/blocks",
-                    badge: "NEW",
-                },
-                {
-                    label: "All Blocks",
-                    icon: "pi pi-fw pi-globe",
-                    url: "https://www.primefaces.org/primeblocks-react",
-                },
-            ],
-        },
-        {
-            label: "Icons",
-            items: [{ label: "PrimeIcons", icon: "pi pi-fw pi-prime", to: "/icons", badge: "NEW" }],
-        },
-        {
-            label: "Pages",
-            icon: "pi pi-fw pi-clone",
-            items: [
-                { label: "Crud", icon: "pi pi-fw pi-user-edit", to: "/crud" },
-                { label: "Timeline", icon: "pi pi-fw pi-calendar", to: "/timeline" },
-                { label: "Empty", icon: "pi pi-fw pi-circle-off", to: "/empty" },
-            ],
-        },
-        {
-            label: "Menu Hierarchy",
-            icon: "pi pi-fw pi-search",
-            items: [
-                {
-                    label: "Submenu 1",
-                    icon: "pi pi-fw pi-bookmark",
-                    items: [
-                        {
-                            label: "Submenu 1.1",
-                            icon: "pi pi-fw pi-bookmark",
-                            items: [
-                                { label: "Submenu 1.1.1", icon: "pi pi-fw pi-bookmark" },
-                                { label: "Submenu 1.1.2", icon: "pi pi-fw pi-bookmark" },
-                                { label: "Submenu 1.1.3", icon: "pi pi-fw pi-bookmark" },
-                            ],
-                        },
-                        {
-                            label: "Submenu 1.2",
-                            icon: "pi pi-fw pi-bookmark",
-                            items: [
-                                { label: "Submenu 1.2.1", icon: "pi pi-fw pi-bookmark" },
-                                { label: "Submenu 1.2.2", icon: "pi pi-fw pi-bookmark" },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    label: "Submenu 2",
-                    icon: "pi pi-fw pi-bookmark",
-                    items: [
-                        {
-                            label: "Submenu 2.1",
-                            icon: "pi pi-fw pi-bookmark",
-                            items: [
-                                { label: "Submenu 2.1.1", icon: "pi pi-fw pi-bookmark" },
-                                { label: "Submenu 2.1.2", icon: "pi pi-fw pi-bookmark" },
-                                { label: "Submenu 2.1.3", icon: "pi pi-fw pi-bookmark" },
-                            ],
-                        },
-                        {
-                            label: "Submenu 2.2",
-                            icon: "pi pi-fw pi-bookmark",
-                            items: [
-                                { label: "Submenu 2.2.1", icon: "pi pi-fw pi-bookmark" },
-                                { label: "Submenu 2.2.2", icon: "pi pi-fw pi-bookmark" },
-                            ],
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            label: "Get Started",
-            items: [
-                {
-                    label: "Documentation",
-                    icon: "pi pi-fw pi-question",
-                    to: "/documentation",
-                },
-                {
-                    label: "View Source",
-                    icon: "pi pi-fw pi-search",
-                    url: "https://github.com/primefaces/sakai-react",
-                },
-            ],
-        },
-    ];
     return (
         <div className="layout-menu-container">
-            <AppSubmenu items={menu} className="layout-menu" onMenuItemClick={onMenuItemClick} root={true} role="menu" />
+            <AppSubmenu items={data.menu} className="layout-menu" onMenuItemClick={onMenuItemClick} root={true} role="menu" />
             <a href="https://www.primefaces.org/primeblocks-react" className="block mt-3">
                 <img alt="primeblocks" className="w-full" src={layoutColorMode === "light" ? `${contextPath}/layout/images/banner-primeblocks.png` : `${contextPath}/layout/images/banner-primeblocks-dark.png`} />
             </a>

@@ -128,7 +128,7 @@ const TableDemo = () => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={`demo/images/avatar/${representative.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} width={32} style={{ verticalAlign: "middle" }} />
+                <img alt={representative.name} src={`${contextPath}/demo/images/avatar/${representative.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} width={32} style={{ verticalAlign: "middle" }} />
                 <span style={{ marginLeft: ".5em", verticalAlign: "middle" }} className="image-text">
                     {representative.name}
                 </span>
@@ -232,7 +232,7 @@ const TableDemo = () => {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`demo/images/product/${rowData.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} alt={rowData.image} className="shadow-2" width={100} />;
+        return <img src={`${contextPath}/demo/images/product/${rowData.image}`} onError={(e) => (e.target.src = "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")} alt={rowData.image} className="shadow-2" width={100} />;
     };
 
     const priceBodyTemplate = (rowData) => {
