@@ -112,14 +112,14 @@ const AppSubmenu = (props) => {
 };
 
 export default function AppMenu() {
-    const { onMenuItemClick, layoutColorMode } = useContext(LayoutContext);
+    const { onMenuItemClick, layoutState } = useContext(LayoutContext);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
         <div className="layout-menu-container">
             <AppSubmenu items={data.menu} className="layout-menu" onMenuItemClick={onMenuItemClick} root={true} role="menu" />
             <a href="https://www.primefaces.org/primeblocks-react" className="block mt-3">
-                <img alt="primeblocks" className="w-full" src={layoutColorMode === "light" ? `${contextPath}/layout/images/banner-primeblocks.png` : `${contextPath}/layout/images/banner-primeblocks-dark.png`} />
+                <img alt="primeblocks" className="w-full" src={layoutState.layoutColorMode === "light" ? `${contextPath}/layout/images/banner-primeblocks.png` : `${contextPath}/layout/images/banner-primeblocks-dark.png`} />
             </a>
         </div>
     );

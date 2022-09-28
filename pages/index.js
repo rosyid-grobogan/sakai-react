@@ -35,7 +35,7 @@ const Dashboard = () => {
     const menu1 = useRef(null);
     const menu2 = useRef(null);
     const [lineOptions, setLineOptions] = useState(null);
-    const { layoutColorMode } = useContext(LayoutContext);
+    const { layoutState } = useContext(LayoutContext);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const applyLightTheme = () => {
@@ -108,12 +108,12 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        if (layoutColorMode === "light") {
+        if (layoutState.layoutColorMode === "light") {
             applyLightTheme();
         } else {
             applyDarkTheme();
         }
-    }, [layoutColorMode]);
+    }, [layoutState.layoutColorMode]);
 
     const formatCurrency = (value) => {
         return value.toLocaleString("en-US", { style: "currency", currency: "USD" });

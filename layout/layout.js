@@ -13,20 +13,20 @@ import { LayoutContext } from "./layoutcontext";
 import classNames from "classnames";
 
 function Layout({ children }) {
-    const { inputStyle, ripple, layoutColorMode, layoutMode, staticMenuInactive, overlayMenuActive, onWrapperClick, onSidebarClick, mobileMenuActive } = useContext(LayoutContext);
+    const { layoutState, layoutConfig, onWrapperClick, onSidebarClick } = useContext(LayoutContext);
     const copyTooltipRef = useRef();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     PrimeReact.ripple = true;
 
     const containerClass = classNames("layout-wrapper", {
-        "layout-overlay": layoutMode === "overlay",
-        "layout-static": layoutMode === "static",
-        "layout-static-sidebar-inactive": staticMenuInactive && layoutMode === "static",
-        "layout-overlay-sidebar-active": overlayMenuActive && layoutMode === "overlay",
-        "layout-mobile-sidebar-active": mobileMenuActive,
-        "p-input-filled": inputStyle === "filled",
-        "p-ripple-disabled": ripple === false,
-        "layout-theme-light": layoutColorMode === "light",
+        "layout-overlay": layoutState.layoutMode === "overlay",
+        "layout-static": layoutState.layoutMode === "static",
+        "layout-static-sidebar-inactive": layoutConfig.staticMenuInactive && layoutState.layoutMode === "static",
+        "layout-overlay-sidebar-active": layoutConfig.overlayMenuActive && layoutState.layoutMode === "overlay",
+        "layout-mobile-sidebar-active": layoutConfig.mobileMenuActive,
+        "p-input-filled": layoutState.inputStyle === "filled",
+        "p-ripple-disabled": layoutState.ripple === false,
+        "layout-theme-light": layoutState.layoutColorMode === "light",
     });
 
     return (
@@ -58,7 +58,7 @@ function Layout({ children }) {
                     </div>
                     <AppConfig />
 
-                    <CSSTransition classNames="layout-mask" timeout={{ enter: 200, exit: 200 }} in={mobileMenuActive} unmountOnExit>
+                    <CSSTransition classNames="layout-mask" timeout={{ enter: 200, exit: 200 }} in={layoutConfig.mobileMenuActive} unmountOnExit>
                         <div className="layout-mask p-component-overlay"></div>
                     </CSSTransition>
                 </div>

@@ -6,13 +6,13 @@ import getConfig from "next/config";
 
 export default function AppTopbar() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const { onToggleMenuClick, layoutColorMode, mobileTopbarMenuActive, onMobileTopbarMenuClick, onMobileSubTopbarMenuClick } = useContext(LayoutContext);
+    const { onToggleMenuClick, layoutState, layoutConfig, onMobileTopbarMenuClick, onMobileSubTopbarMenuClick } = useContext(LayoutContext);
     return (
         <div className="layout-topbar">
             <Link href={"/"}>
                 <a className="layout-topbar-logo">
                     <>
-                        <img src={layoutColorMode === "light" ? `${contextPath}/layout/images/logo-dark.svg` : `${contextPath}/layout/images/logo-white.svg`} width="47.22px" height={"35px"} widt={"true"} alt="logo" />
+                        <img src={layoutState.layoutColorMode === "light" ? `${contextPath}/layout/images/logo-dark.svg` : `${contextPath}/layout/images/logo-white.svg`} width="47.22px" height={"35px"} widt={"true"} alt="logo" />
                         <span>SAKAI</span>
                     </>
                 </a>
@@ -26,7 +26,7 @@ export default function AppTopbar() {
                 <i className="pi pi-ellipsis-v" />
             </button>
 
-            <ul className={classNames("layout-topbar-menu lg:flex origin-top", { "layout-topbar-menu-mobile-active": mobileTopbarMenuActive })}>
+            <ul className={classNames("layout-topbar-menu lg:flex origin-top", { "layout-topbar-menu-mobile-active": layoutConfig.mobileTopbarMenuActive })}>
                 <li>
                     <button className="p-link layout-topbar-button" onClick={onMobileSubTopbarMenuClick}>
                         <i className="pi pi-calendar" />

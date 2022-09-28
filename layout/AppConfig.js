@@ -11,7 +11,7 @@ export default function AppConfig() {
     const [scale, setScale] = useState(14);
     const [scales] = useState([12, 13, 14, 15, 16]);
     const [theme, setTheme] = useState("lara-light-indigo");
-    const { ripple, onRipple, inputStyle, onInputStyleChange, layoutMode, onLayoutModeChange, onColorModeChange } = useContext(LayoutContext);
+    const { layoutState, onRipple, onInputStyleChange, onLayoutModeChange, onColorModeChange } = useContext(LayoutContext);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const config = useRef(null);
@@ -138,26 +138,26 @@ export default function AppConfig() {
                 <h5>Input Style</h5>
                 <div className="p-formgroup-inline">
                     <div className="field-radiobutton">
-                        <RadioButton inputId="input_outlined" name="inputstyle" value="outlined" onChange={(e) => onInputStyleChange(e.value)} checked={inputStyle === "outlined"} />
+                        <RadioButton inputId="input_outlined" name="inputstyle" value="outlined" onChange={(e) => onInputStyleChange(e.value)} checked={layoutState.inputStyle === "outlined"} />
                         <label htmlFor="input_outlined">Outlined</label>
                     </div>
                     <div className="field-radiobutton">
-                        <RadioButton inputId="input_filled" name="inputstyle" value="filled" onChange={(e) => onInputStyleChange(e.value)} checked={inputStyle === "filled"} />
+                        <RadioButton inputId="input_filled" name="inputstyle" value="filled" onChange={(e) => onInputStyleChange(e.value)} checked={layoutState.inputStyle === "filled"} />
                         <label htmlFor="input_filled">Filled</label>
                     </div>
                 </div>
 
                 <h5>Ripple Effect</h5>
-                <InputSwitch checked={ripple} onChange={onRipple} />
+                <InputSwitch checked={layoutState.ripple} onChange={onRipple} />
 
                 <h5>Menu Type</h5>
                 <div className="p-formgroup-inline">
                     <div className="field-radiobutton">
-                        <RadioButton inputId="static" name="layoutMode" value="static" onChange={(e) => onLayoutModeChange(e.value)} checked={layoutMode === "static"} />
+                        <RadioButton inputId="static" name="layoutMode" value="static" onChange={(e) => onLayoutModeChange(e.value)} checked={layoutState.layoutMode === "static"} />
                         <label htmlFor="static">Static</label>
                     </div>
                     <div className="field-radiobutton">
-                        <RadioButton inputId="overlay" name="layoutMode" value="overlay" onChange={(e) => onLayoutModeChange(e.value)} checked={layoutMode === "overlay"} />
+                        <RadioButton inputId="overlay" name="layoutMode" value="overlay" onChange={(e) => onLayoutModeChange(e.value)} checked={layoutState.layoutMode === "overlay"} />
                         <label htmlFor="overlay">Overlay</label>
                     </div>
                 </div>

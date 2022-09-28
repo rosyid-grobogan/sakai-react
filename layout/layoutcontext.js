@@ -4,50 +4,73 @@ import PrimeReact from "primereact/api";
 export const LayoutContext = React.createContext();
 
 function LayoutProvider({ children }) {
-    const [layoutColorMode, setLayoutColorMode] = useState("light");
-    const [layoutMode, setLayoutMode] = useState("static");
-    const [inputStyle, setInputStyle] = useState("outlined");
-    const [ripple, setRipple] = useState(true);
-    const [staticMenuInactive, setStaticMenuInactive] = useState(false);
-    const [overlayMenuActive, setOverlayMenuActive] = useState(false);
-    const [mobileMenuActive, setMobileMenuActive] = useState(false);
-    const [mobileTopbarMenuActive, setMobileTopbarMenuActive] = useState(false);
+    const [layoutState, setLayoutState] = useState({
+        layoutColorMode: "light",
+        layoutMode: "static",
+        inputStyle: "outlined",
+        ripple: true,
+    });
+    const [layoutConfig, setLayoutConfig] = useState({
+        staticMenuInactive: false,
+        overlayMenuActive: false,
+        mobileMenuActive: false,
+        mobileTopbarMenuActive: false,
+    });
+
     let menuClick = false;
     let mobileTopbarMenuClick = false;
 
     useEffect(() => {
-        if (mobileMenuActive) {
+        if (layoutConfig.mobileMenuActive) {
             addClass(document.body, "body-overflow-hidden");
         } else {
             removeClass(document.body, "body-overflow-hidden");
         }
-    }, [mobileMenuActive]);
+    }, [layoutConfig.mobileMenuActive]);
 
     const onInputStyleChange = (inputStyle) => {
-        setInputStyle(inputStyle);
+        setLayoutState((prevState) => ({
+            ...prevState,
+            inputStyle: inputStyle,
+        }));
     };
 
     const onRipple = (e) => {
         PrimeReact.ripple = e.value;
-        setRipple(e.value);
+        setLayoutState((prevState) => ({
+            ...prevState,
+            ripple: e.value,
+        }));
     };
 
     const onLayoutModeChange = (mode) => {
-        setLayoutMode(mode);
+        setLayoutState((prevState) => ({
+            ...prevState,
+            layoutMode: mode,
+        }));
     };
 
     const onColorModeChange = (mode) => {
-        setLayoutColorMode(mode);
+        setLayoutState((prevState) => ({
+            ...prevState,
+            layoutColorMode: mode,
+        }));
     };
 
     const onWrapperClick = (event) => {
         if (!menuClick) {
-            setOverlayMenuActive(false);
-            setMobileMenuActive(false);
+            setLayoutConfig((prevState) => ({
+                ...prevState,
+                overlayMenuActive: false,
+                mobileMenuActive: false,
+            }));
         }
 
         if (!mobileTopbarMenuClick) {
-            setMobileTopbarMenuActive(false);
+            setLayoutConfig((prevState) => ({
+                ...prevState,
+                mobileTopbarMenuActive: false,
+            }));
         }
 
         mobileTopbarMenuClick = false;
@@ -58,18 +81,29 @@ function LayoutProvider({ children }) {
         menuClick = true;
 
         if (isDesktop()) {
-            if (layoutMode === "overlay") {
-                if (mobileMenuActive === true) {
-                    setOverlayMenuActive(true);
+            if (layoutState.layoutMode === "overlay") {
+                if (layoutConfig.mobileMenuActive === true) {
+                    setLayoutConfig((prevState) => ({
+                        ...prevState,
+                        overlayMenuActive: true,
+                    }));
                 }
-
-                setOverlayMenuActive((prevState) => !prevState);
-                setMobileMenuActive(false);
-            } else if (layoutMode === "static") {
-                setStaticMenuInactive((prevState) => !prevState);
+                setLayoutConfig((prevState) => ({
+                    ...prevState,
+                    overlayMenuActive: !prevState.overlayMenuActive,
+                    mobileMenuActive: false,
+                }));
+            } else if (layoutState.layoutMode === "static") {
+                setLayoutConfig((prevState) => ({
+                    ...prevState,
+                    staticMenuInactive: !prevState.staticMenuInactive,
+                }));
             }
         } else {
-            setMobileMenuActive((prevState) => !prevState);
+            setLayoutConfig((prevState) => ({
+                ...prevState,
+                mobileMenuActive: !prevState.mobileMenuActive,
+            }));
         }
 
         event.preventDefault();
@@ -82,7 +116,10 @@ function LayoutProvider({ children }) {
     const onMobileTopbarMenuClick = (event) => {
         mobileTopbarMenuClick = true;
 
-        setMobileTopbarMenuActive((prevState) => !prevState);
+        setLayoutConfig((prevState) => ({
+            ...prevState,
+            mobileMenuActive: !prevState.mobileMenuActive,
+        }));
         event.preventDefault();
     };
 
@@ -94,8 +131,11 @@ function LayoutProvider({ children }) {
 
     const onMenuItemClick = (event) => {
         if (!event.item.items) {
-            setOverlayMenuActive(false);
-            setMobileMenuActive(false);
+            setLayoutConfig((prevState) => ({
+                ...prevState,
+                overlayMenuActive: false,
+                mobileMenuActive: false,
+            }));
         }
     };
     const isDesktop = () => {
@@ -112,21 +152,11 @@ function LayoutProvider({ children }) {
         else element.className = element.className.replace(new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " ");
     };
 
-    const initLayoutState = {
-        layoutMode,
-        inputStyle,
-        ripple,
-        staticMenuInactive,
-        overlayMenuActive,
-        mobileMenuActive,
-        mobileTopbarMenuActive,
-        setLayoutMode,
-        setInputStyle,
-        setRipple,
-        setStaticMenuInactive,
-        setOverlayMenuActive,
-        setMobileMenuActive,
-        setMobileTopbarMenuActive,
+    const value = {
+        layoutConfig,
+        setLayoutConfig,
+        layoutState,
+        setLayoutState,
         onInputStyleChange,
         onRipple,
         onLayoutModeChange,
@@ -137,10 +167,8 @@ function LayoutProvider({ children }) {
         onMobileTopbarMenuClick,
         onMobileSubTopbarMenuClick,
         onMenuItemClick,
-        layoutColorMode,
-        setLayoutColorMode,
     };
-    return <LayoutContext.Provider value={initLayoutState}>{children}</LayoutContext.Provider>;
+    return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 }
 
 export default LayoutProvider;
