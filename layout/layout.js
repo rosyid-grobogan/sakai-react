@@ -11,12 +11,30 @@ import { Tooltip } from "primereact/tooltip";
 import getConfig from "next/config";
 import { LayoutContext } from "./layoutcontext";
 import classNames from "classnames";
-
+import { useEventListener } from "primereact";
 function Layout({ children }) {
     const { layoutState, layoutConfig, onWrapperClick, onSidebarClick } = useContext(LayoutContext);
     const copyTooltipRef = useRef();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     PrimeReact.ripple = true;
+    const containerRef = useRef();
+    const sideBarRef = useRef();
+
+    const [bindTopbarDocumentClickListener, unbindTopbarDocumentClickListener] = useEventListener({
+        target: containerRef,
+        type: "click",
+        listener: onWrapperClick,
+    });
+    const [bindSidebarDocumentClickListener, unbindSidebarDocumentClickListener] = useEventListener({
+        target: sideBarRef,
+        type: "click",
+        listener: onSidebarClick,
+    });
+
+    useEffect(() => {
+        bindTopbarDocumentClickListener();
+        bindSidebarDocumentClickListener();
+    }, [layoutConfig.overlayMenuActive]);
 
     const containerClass = classNames("layout-wrapper", {
         "layout-overlay": layoutState.layoutMode === "overlay",
@@ -42,12 +60,12 @@ function Layout({ children }) {
                     {/* eslint-enable */}
                 </Head>
 
-                <div className={containerClass} onClick={onWrapperClick}>
+                <div ref={containerRef} className={containerClass}>
                     <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
 
                     <AppTopbar />
 
-                    <div className="layout-sidebar" onClick={onSidebarClick}>
+                    <div ref={sideBarRef} className="layout-sidebar">
                         <AppMenu />
                     </div>
 
