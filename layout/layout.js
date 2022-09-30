@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import Head from "next/head";
 import { CSSTransition } from "react-transition-group";
 import AppTopbar from "./AppTopbar";
@@ -11,7 +11,7 @@ import { Tooltip } from "primereact/tooltip";
 import getConfig from "next/config";
 import { LayoutContext } from "./layoutcontext";
 import classNames from "classnames";
-import { useEventListener } from "primereact";
+import { useEventListener } from "primereact/hooks";
 function Layout({ children }) {
     const { layoutState, layoutConfig, onWrapperClick, onSidebarClick } = useContext(LayoutContext);
     const copyTooltipRef = useRef();
